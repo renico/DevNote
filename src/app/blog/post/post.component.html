@@ -1,16 +1,16 @@
-  <md-card class="example-form" *ngIf="post">
-    <md-card-header >
-      <md-card-title>{{post.title}}</md-card-title>
-      <md-card-subtitle>{{post.authorName}}</md-card-subtitle>
-    </md-card-header>
+<md-card class="example-form" *ngIf="post">
+  <md-card-header>
+    <md-card-title>{{post.title}}</md-card-title>
+    <md-card-subtitle>{{post.authorName}}</md-card-subtitle>
+  </md-card-header>
 
-    <md-card-content>
-      <div [innerHTML]="post.content"></div>
-    </md-card-content>
+  <md-card-content>
+    <div [innerHTML]="post.content"></div>
+  </md-card-content>
 
-    <md-card-actions>
-        <button md-raised-button [routerLink]="[ '/blog/posts']">Return to posts liste</button>
-        <button md-button [routerLink]="[ '/blog/edit-post', post.$key]">edit</button>
-    </md-card-actions>
+  <md-card-actions>
+    <button md-raised-button [routerLink]="[ '/blog/posts']"><md-icon>list</md-icon> Return to posts liste</button>
+    <button md-button [routerLink]="[ '/blog/edit-post', post.$key]" color="primary"><md-icon>create</md-icon> Edit</button>
+  </md-card-actions>
 
-  </md-card>
+</md-card>
