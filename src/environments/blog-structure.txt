@@ -1,0 +1,36 @@
+dsadsa-ec742
+
+ post-comments
+ -KeiDux2taCk4DtYrNQ9
+  -KeiIwIUSmcRgYskmFeS
+   author: "Serkan ÜNAL"
+   text: "Bu da Posta ilk yorum"
+   uid: "NTMYclfWFshb9g5nslDvt6hUF2s1"
+
+ posts
+  -KeiDux2taCk4DtYrNQ9
+   author: "Serkan ÜNAL"
+   authorPic: "https://lh4.googleusercontent.com/-ziVxrleWDgo/..."
+   body: "İlk post içerik"
+   starCount: 1
+   stars
+    NTMYclfWFshb9g5nslDvt6hUF2s1: true
+   title: "İlk Post"
+   uid: "NTMYclfWFshb9g5nslDvt6hUF2s1"
+
+ user-posts
+  NTMYclfWFshb9g5nslDvt6hUF2s1
+   -KeiDux2taCk4DtYrNQ9
+    author: "Serkan ÜNAL"
+    authorPic: "https://lh4.googleusercontent.com/-ziVxrleWDgo/..."
+    body: "İlk post içerik"
+    starCount:1
+    stars
+     NTMYclfWFshb9g5nslDvt6hUF2s1: true
+    title: "İlk Post"
+    uid: "NTMYclfWFshb9g5nslDvt6hUF2s1"
+ users
+  NTMYclfWFshb9g5nslDvt6hUF2s1
+   email: "serkanunal@gmail.com"
+   profile_picture: "https://lh4.googleusercontent.com/-ziVxrleWDgo/..."
+   username:"Serkan ÜNAL"

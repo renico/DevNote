@@ -1,0 +1,16 @@
+<h2>
+  posts-list
+</h2>
+
+<md-grid-list cols="4" gutter="3em" rowheight="100px">
+  <md-grid-tile 
+  *ngFor="let post of posts  | async" 
+  [colspan]="post.cols" 
+  [rowspan]="post.rows" 
+  [style.background]="post.color"
+  [routerLink]="[ '/blog/post', post.$key]">
+  <md-grid-tile-footer>
+    {{post.title}}
+    </md-grid-tile-footer>
+  </md-grid-tile>
+</md-grid-list>

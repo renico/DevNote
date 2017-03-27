@@ -1,0 +1,19 @@
+  <md-card class="example-form">
+    <md-card-header>
+      <md-card-title>{{post.title}}</md-card-title>
+      <!--<img md-card-avatar [style.background-image]="post.authorPict" >-->
+      <md-card-subtitle>{{post.authorName}}</md-card-subtitle>
+    </md-card-header>
+
+    <md-card-content>
+      <div [innerHTML]="post.content"></div>
+
+    </md-card-content>
+
+    <md-card-actions>
+        <!--<button md-button>LIKE</button>-->
+        <button md-raised-button [routerLink]="[ '/blog/posts']">Return to posts liste</button>
+        <button md-button [routerLink]="[ '/blog/edit-post', post.$key]">edit</button>
+    </md-card-actions>
+
+  </md-card>
