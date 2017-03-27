@@ -11,54 +11,40 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 
 export class EditComponent implements OnInit {
   error: any;
   state: string; // property for animations
-
   item: FirebaseListObservable<any>;
   auth: any;
   key: string;
+  label= 'Create';
+  // post = {
+  //   'title': '',
+  //   'content': '',
+  //   'color': formData.value.color,
+  //   'authorUID': this.auth.uid,
+  //   'authorName': this.auth.auth.displayName,
+  //   'authorPict': this.auth.auth.photoURL,
+  //   'maj': Date.now()
+  // };
 
-  constructor(
-    public af: AngularFire,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+  constructor( public af: AngularFire, private router: Router, private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit() {
     this.af.auth.subscribe(auth => {
-      console.log('auth:' + auth);
       this.auth = auth;
     });
-  }
-  ngOnInit() {
     // subscribe to router event
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.key = params['id'];
-      this.af.database.object('/posts/' + this.key).subscribe(post => {
-        this.item = post;
-        console.log('this.item:' + this.item);
-      });
+      if (params['id']) {
+        this.key = params['id'];
+        this.label = 'Update';
+        this.af.database.object('/posts/' + this.key).subscribe(post => {
+          this.item = post;
+        });
+      }
     });
-  }
-
-  onCreate(formData) {
-    console.log('onSubmit()');
-    console.log('this.auth.displayName:' + this.auth.displayName);
-    if (formData) {
-      console.log(formData);
-      const post = {
-        'title': formData.value.title,
-        'content': formData.value.content,
-        'cols': formData.value.cols,
-        'rows': formData.value.rows,
-        'color': formData.value.color,
-        'authorUID': this.auth.uid,
-        'authorName': this.auth.auth.displayName,
-        'authorPict': this.auth.auth.photoURL,
-        'date': Date.now()
-      };
-      this.key = this.af.database.list('/posts').push(post).key;
-      console.log('key:' + this.key);
-    };
   }
 
   onUpdate(formData) {
-    console.log('onUpdate()');
+    console.log('onUpdate()key:' + this.key);
     if (formData) {
       const post = {
         'title': formData.value.title,
@@ -71,14 +57,36 @@ export class EditComponent implements OnInit {
         'authorPict': this.auth.auth.photoURL,
         'maj': Date.now()
       };
-      this.af.database.object('/posts/' + this.key).update(post).then(
-        success => {
-          this.router.navigateByUrl('/home');
-        }).catch(
-        error => {
-          console.log(error);
-        });
-    };
+
+      const desc = {
+        'title': formData.value.title,
+        'cols': formData.value.cols,
+        'rows': formData.value.rows,
+        'color': formData.value.color,
+        'authorUID': this.auth.uid
+      };
+
+      if (this.key) {
+        this.af.database.object('/posts/' + this.key).update(post).then(
+          success => {
+            // this.router.navigateByUrl('/home');
+          }).catch(
+          error => {
+            console.log(error);
+          });
+
+        this.af.database.object('/postsDesc/' + this.key).update(desc).then(
+          success => {
+          }).catch(
+          error => {
+            console.log(error);
+          });
+      } else {
+        this.key = this.af.database.list('/posts').push(post).key;
+        this.af.database.list('/postsDesc/' + this.key).push(desc);
+        this.label = 'Update';
+      }
+    }
   }
 
 }

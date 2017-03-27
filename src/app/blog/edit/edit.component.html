@@ -1,68 +1,55 @@
 <div class="example-form">
   <md-card class="example-form">
-    
-    <md-card-header>
-      <div md-card-avatar class="example-header-image"></div>
-      <md-card-title>Edit post</md-card-title>
-    <!--<md-card-subtitle>{{item.title}}</md-card-subtitle>-->
-  </md-card-header>
-    
+    <form #formData='ngForm'>
 
-  <form #formData='ngForm'>
+    <md-input-container class="example-full-width">
+      <input mdInput placeholder="Title" 
+      [ngModel]="item?.title"  name="title" required>
+    </md-input-container>
 
-  <md-input-container class="example-full-width">
-    <input mdInput placeholder="Title" [(ngModel)]="item.title" name="title" required>
-  </md-input-container>
-<!--[ngModelOptions]="{standalone: true}"
-    (change)="onChange($event)"
-    (ready)="onReady($event)"
-    (focus)="onFocus($event)"
-    (blur)="onBlur($event)"
--->
-<ckeditor
-    [(ngModel)]="item.content"
-    name="content"
-    debounce="500">
-  </ckeditor>
-  <!--<md-input-container class="example-full-width">
 
-    <textarea mdInput placeholder="content" [(ngModel)]="item.content" name="content" required>{{item.content}}</textarea>
-  </md-input-container>-->
+    <ckeditor
+      [ngModel]="item?.content" 
+      name="content"
+      debounce="500">
+    </ckeditor>
 
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <md-input-container class="example-full-width">
-          <input mdInput placeholder="cols" [(ngModel)]="item.cols" name="cols">
-        </md-input-container>
-      </td>
-      <td>
-        <md-input-container class="example-full-width">
-          <input mdInput placeholder="rows" [(ngModel)]="item.rows" name="rows">
-        </md-input-container>
-      </td>
-      <td>
-        <md-input-container class="example-full-width">
-          <input mdInput #color maxlength="7" placeholder="color" [(ngModel)]="item.color" name="color">
-          <md-hint align="end">{{color.value.length}} / 7</md-hint>
-        </md-input-container>
-      </td>
-    </tr>
-  </table>
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="cols" [ngModel]="item?.cols" name="cols">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="rows" [ngModel]="item?.rows" name="rows">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container class="example-full-width">
+          <input mdInput #color maxlength="7" placeholder="color" [ngModel]="item?.color" name="color">
+            <!--<md-hint ngIf="color" align="end">{{color.value.length}} / 7</md-hint>-->
+          </md-input-container>
+        </td>
+      </tr>
+    </table>
 
-  <span>author: {{item.authorName}}</span>
-    
-      <md-card-actions>
-        <!--<button md-button>LIKE</button>-->
-        <button md-raised-button [routerLink]="[ '/blog/posts']">Return to posts liste</button>
-    <button md-button type="submit" [disabled]="!formData.valid" 
-    color="accent" (click)="onCreate(formData)">Create</button>
-    <button md-button *ngIf="item" type="submit" 
-    color="primary" 
-  (click)="onUpdate(formData)">Update</button>
-    </md-card-actions>
+    <div *ngIf="item">
+      <span *ngIf="item.authorName">Author: {{item.authorName}}</span>
+      <span *ngIf="item.date">Create: {{item.date | date: 'dd/MM/yyyy'}}</span>
+      <span *ngIf="item.maj">Màj: {{item.maj | date: 'dd/MM/yyyy'}}</span>
+    </div>
+      
+      <span *ngIf="auth && !item">author: {{auth.auth.displayName}}</span>
+        <md-card-actions>
+          <!--<button md-button>LIKE</button>-->
+          <button md-raised-button [routerLink]="[ '/blog/posts']">Return to posts liste</button>
+      <button md-button type="submit" color="primary" 
+      (click)="onUpdate(formData)">{{label}}</button>
+      </md-card-actions>
 
-  </form>
+    </form>
   </md-card>
 
 

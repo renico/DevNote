@@ -8,29 +8,46 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  canActivate:boolean=true;
+  canActivate = false;
   post: FirebaseListObservable<any>;
-  key:string;
+  key: string;
 
-  constructor(public af: AngularFire, 
-              private router: Router,
-              private activatedRoute: ActivatedRoute){}
+  constructor(
+    public af: AngularFire,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
+      activatedRoute.params.subscribe((params: Params) => {
+        af.database.object('/posts/' + params['id']).subscribe(post => {
+          this.post = post;
+          // af.auth.subscribe(auth => {
+          //   if (auth.uid === post.authorUID) {
+          //     this.canActivate = true;
+          //   }
+          // });
+        });
+    });
+
+
+    //       activatedRoute.params.subscribe((params: Params) => {
+    //   if (params['id']) {
+    //     this.key = params['id'];
+    //     console.log('post key:' + this.key);
+    //     af.database.object('/posts/' + this.key).subscribe(post => {
+    //       this.post = post;
+    //       console.log('post:' + post);
+    //       af.auth.subscribe(auth => {
+    //         if (auth.uid === post.authorUID) {
+    //           this.canActivate = true;
+    //         }
+    //       });
+    //     });
+    //   } else {
+    //     // console.log(this.af.database.object('/post').last);
+    //   }
+    // });
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['id']){
-        this.key = params['id'];
-        this.af.database.object('/posts/' + this.key).subscribe(post => {
-          this.af.auth.subscribe( auth => {
-            if(auth.uid == post.authorUID){this.canActivate =true}
-          });
-          this.post = post;
-
-        });
-      }else{
-        //console.log(this.af.database.object('/post').last);
-      }
-    });
   }
 
 }

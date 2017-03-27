@@ -10,9 +10,9 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class PostsListComponent implements OnInit {
   posts: FirebaseListObservable<any>;
 
-  constructor(public af: AngularFire, private router: Router) {
-    this.posts = af.database.list('posts');
-    console.log(this.posts.forEach( post => console.log(post)));
+  constructor( public af: AngularFire, private router: Router) {
+    this.posts = af.database.list('postsDesc');
+    this.posts.forEach( post => console.log(post));
    }
 
   ngOnInit() {

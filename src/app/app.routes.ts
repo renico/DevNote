@@ -19,6 +19,7 @@ export const router : Routes = [
     { path: 'login-email', component: EmailComponent },
     { path: 'home', component: HomeComponent },
     { path: 'blog/posts', component: PostsListComponent },
+    { path: 'blog/edit-post', component: EditComponent, canActivate: [AuthService] },
     { path: 'blog/edit-post/:id', component: EditComponent, canActivate: [AuthService] },
     { path: 'blog/post/:id', component: PostComponent },
 
