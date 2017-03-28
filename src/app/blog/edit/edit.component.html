@@ -9,20 +9,23 @@
 
       <ckeditor [ngModel]="item?.content" name="content" debounce="500">
       </ckeditor>
-
+      <br>
       <table class="example-full-width" cellspacing="0">
-        <tr>
+        <tr style="background-color: #EEEEFF; box-shadow: 2px 2px 5px #999; margin:10px 10px; ">
           <td>
+            <span>Grind list options:</span>
+          </td>
+          <td style="width: 60px">
             <md-input-container class="example-full-width">
               <input mdInput placeholder="cols" [ngModel]="item?.cols" name="cols">
             </md-input-container>
           </td>
-          <td>
+          <td style="width: 60px">
             <md-input-container class="example-full-width">
               <input mdInput placeholder="rows" [ngModel]="item?.rows" name="rows">
             </md-input-container>
           </td>
-          <td>
+          <td style="width: 120px">
             <md-input-container class="example-full-width">
               <input mdInput #color maxlength="7" placeholder="color" [ngModel]="item?.color" name="color">
               <!--<md-hint ngIf="color" align="end">{{color.value.length}} / 7</md-hint>-->
@@ -30,7 +33,7 @@
           </td>
         </tr>
       </table>
-
+      <br>
       <div *ngIf="item">
         <span *ngIf="item.authorName"><md-icon>account circle</md-icon>Author: {{item.authorName}}</span>
         <span *ngIf="item.date"><md-icon>date range</md-icon>Create: {{item.date | date: 'dd/MM/yyyy'}}</span>
@@ -47,7 +50,9 @@
         <button *ngIf="item" md-raised-button [routerLink]="[ '/blog/post', item?.$key]">
           <md-icon>visibility</md-icon> View post</button>
         <button md-raised-button type="submit" 
-        color="primary" (click)="onUpdate(formData)"><md-icon>save</md-icon> Save</button>
+        class="btn-primary" (click)="onUpdate(formData)"><md-icon>save</md-icon> Save</button>
+         <button md-raised-button type="submit" 
+        class="btn-danger" (click)="onDelete()"><md-icon>delete</md-icon> Delete</button>
       </md-card-actions>
 
     </form>

@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700';
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+
+
 
 body {
     background:#E2E4E6;

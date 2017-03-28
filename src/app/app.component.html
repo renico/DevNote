@@ -1,16 +1,13 @@
 
   <md-toolbar color="primary">
-    <button class="app-icon-button" (click)="sidenav.toggle()">
-      <i class="material-icons app-toolbar-menu">menu</i>
-    </button>
+    <md-icon>menu</md-icon>
 
     Prise de notes:
 
-    <span class="app-toolbar-filler"></span>
-    <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
     <span class="example-spacer"></span>
-    <app-current-user></app-current-user>
+    <app-current-user style="float: right;"></app-current-user>
   
   </md-toolbar>
+
 
 <router-outlet></router-outlet>

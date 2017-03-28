@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import {MdSnackBar} from '@angular/material';
+
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 
 @Component({
@@ -14,7 +16,6 @@ export class EditComponent implements OnInit {
   item: FirebaseListObservable<any>;
   auth: any;
   key: string;
-  label= 'Create';
   // post = {
   //   'title': '',
   //   'content': '',
@@ -25,7 +26,11 @@ export class EditComponent implements OnInit {
   //   'maj': Date.now()
   // };
 
-  constructor( public af: AngularFire, private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    public af: AngularFire,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    public snackBar: MdSnackBar) {}
 
   ngOnInit() {
     this.af.auth.subscribe(auth => {
@@ -35,7 +40,6 @@ export class EditComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params['id']) {
         this.key = params['id'];
-        this.label = 'Update';
         this.af.database.object('/posts/' + this.key).subscribe(post => {
           this.item = post;
         });
@@ -77,6 +81,7 @@ export class EditComponent implements OnInit {
 
         this.af.database.object('/postsDesc/' + this.key).update(desc).then(
           success => {
+            this.snackBar.open('post saved', '', {duration: 2000, });
           }).catch(
           error => {
             console.log(error);
@@ -84,9 +89,23 @@ export class EditComponent implements OnInit {
       } else {
         this.key = this.af.database.list('/posts').push(post).key;
         this.af.database.list('/postsDesc/' + this.key).push(desc);
-        this.label = 'Update';
       }
     }
+  }
+
+  onDelete() {
+    console.log('onDelete');
+    this.snackBar.open('Do you want to delete this post? ', 'Yes')
+      .onAction().subscribe(() => {
+        this.deletePost();
+      });
+  }
+
+  deletePost() {
+     console.log('deletePost');
+    this.af.database.list('/posts/' + this.key).remove();
+    this.af.database.list('/postsDesc/' + this.key).remove()
+    .then( success =>  this.snackBar.open('post deleted', '', {duration: 2000, }));
   }
 
 }
