@@ -6,7 +6,10 @@
 
   <md-card-content>
     <div [innerHTML]="post.content"></div>
+     <button md-raised-button [routerLink]="[ '/blog/posts']"><md-icon>comment</md-icon> Comments</button>
   </md-card-content>
+
+  
 
   <md-card-actions>
     <button md-raised-button [routerLink]="[ '/blog/posts']"><md-icon>list</md-icon> Return to posts liste</button>

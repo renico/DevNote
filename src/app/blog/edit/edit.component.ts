@@ -16,15 +16,6 @@ export class EditComponent implements OnInit {
   item: FirebaseListObservable<any>;
   auth: any;
   key: string;
-  // post = {
-  //   'title': '',
-  //   'content': '',
-  //   'color': formData.value.color,
-  //   'authorUID': this.auth.uid,
-  //   'authorName': this.auth.auth.displayName,
-  //   'authorPict': this.auth.auth.photoURL,
-  //   'maj': Date.now()
-  // };
 
   constructor(
     public af: AngularFire,
@@ -88,14 +79,14 @@ export class EditComponent implements OnInit {
           });
       } else {
         this.key = this.af.database.list('/posts').push(post).key;
-        this.af.database.list('/postsDesc/' + this.key).push(desc);
+        this.af.database.object('/postsDesc/' + this.key).update(desc);
       }
     }
   }
 
   onDelete() {
     console.log('onDelete');
-    this.snackBar.open('Do you want to delete this post? ', 'Yes')
+    this.snackBar.open('Do you want to delete this post? ', 'Yes', {duration: 3000, })
       .onAction().subscribe(() => {
         this.deletePost();
       });
@@ -105,7 +96,10 @@ export class EditComponent implements OnInit {
      console.log('deletePost');
     this.af.database.list('/posts/' + this.key).remove();
     this.af.database.list('/postsDesc/' + this.key).remove()
-    .then( success =>  this.snackBar.open('post deleted', '', {duration: 2000, }));
+    .then( success =>  {
+      this.snackBar.open('post deleted', '', {duration: 2000, });
+      this.router.navigateByUrl('/home');
+    });
   }
 
 }

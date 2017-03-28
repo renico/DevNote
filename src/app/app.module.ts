@@ -24,6 +24,8 @@ import { HomeComponent } from './home/home.component';
 import { EditComponent } from './blog/edit/edit.component';
 import { PostsListComponent } from './blog/posts-list/posts-list.component';
 import { PostComponent } from './blog/post/post.component';
+import { CommentComponent } from './blog/comment/comment.component';
+import { CommentsListComponent } from './blog/comments-list/comments-list.component';
 
 
 
@@ -39,6 +41,8 @@ import { PostComponent } from './blog/post/post.component';
     EditComponent,
     PostsListComponent,
     PostComponent,
+    CommentComponent,
+    CommentsListComponent,
    
   ],
   imports: [
