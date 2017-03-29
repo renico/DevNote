@@ -10,8 +10,10 @@
       <ckeditor [ngModel]="item?.content" name="content" debounce="500">
       </ckeditor>
       <br>
-      <table class="example-full-width" cellspacing="0">
-        <tr style="background-color: #EEEEFF; box-shadow: 2px 2px 5px #999; margin:10px 10px; ">
+
+      <!-- Post description section -->
+      <table class="example-full-width" cellspacing="0" style="background-color: #EEEEFF; box-shadow: 2px 2px 5px #999; margin:10px 10px; ">
+        <tr>
           <td>
             <span>Grind list options:</span>
           </td>
@@ -32,6 +34,13 @@
             </md-input-container>
           </td>
         </tr>
+        
+       <input #filePicker placeholder="Title" type="file" accept="image/*,capture=camera">
+      <button md-raised-button title="Add an image" type="submit" class="btn-primary" (click)="saveImage(filePicker)">
+      <md-icon>save</md-icon> Add a image</button>
+      <div *ngIf="item">
+        <img *ngIf="item.imageUrl" #img [src]="imageSrc">
+      </div>
       </table>
       <br>
       <div *ngIf="item">

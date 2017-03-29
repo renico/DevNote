@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { firebaseConfig } from './firebase.config';
 import * as firebase from 'firebase';
 import { AngularFireModule } from 'angularfire2';
-import { firebaseConfig } from './firebase.config';
 
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
@@ -26,6 +26,7 @@ import { PostsListComponent } from './blog/posts-list/posts-list.component';
 import { PostComponent } from './blog/post/post.component';
 import { CommentComponent } from './blog/comment/comment.component';
 import { CommentsListComponent } from './blog/comments-list/comments-list.component';
+import { FileUploadComponent } from './comp/file-upload/file-upload.component';
 
 
 
@@ -43,7 +44,7 @@ import { CommentsListComponent } from './blog/comments-list/comments-list.compon
     PostComponent,
     CommentComponent,
     CommentsListComponent,
-   
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +56,6 @@ import { CommentsListComponent } from './blog/comments-list/comments-list.compon
     CKEditorModule,
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

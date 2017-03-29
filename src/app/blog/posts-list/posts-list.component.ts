@@ -11,7 +11,7 @@ export class PostsListComponent implements OnInit {
   posts: FirebaseListObservable<any>;
 
   constructor( public af: AngularFire, private router: Router) {
-    this.posts = af.database.list('postsDesc');
+    this.posts = af.database.list('/blog/postsDesc');
     this.posts.forEach( post => console.log(post));
    }
 

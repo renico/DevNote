@@ -7,16 +7,15 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
   styleUrls: ['./comments-list.component.css']
 })
 export class CommentsListComponent implements OnInit {
- @Input() post;
-  comments: FirebaseListObservable<any[]>;
+ @Input() comments: FirebaseListObservable<any[]>;
+ @Input() postKey;
 
   constructor(public af: AngularFire) { }
 
   ngOnInit() {
-    this.comments = this.af.database.list('postComments' + this.post.$key).then(
-      success => {
-
-      }).catch( error => console.log(error));
+    if (!this.comments) {
+      this.comments = this.af.database.list('postComments' + this.postKey);
+    }
   }
 
 }

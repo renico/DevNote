@@ -17,7 +17,7 @@ export class PostComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute) {
       activatedRoute.params.subscribe((params: Params) => {
-        af.database.object('/posts/' + params['id']).subscribe(post => {
+        af.database.object('/blog/posts/' + params['id']).subscribe(post => {
           this.post = post;
           // af.auth.subscribe(auth => {
           //   if (auth.uid === post.authorUID) {
@@ -32,7 +32,7 @@ export class PostComponent implements OnInit {
     //   if (params['id']) {
     //     this.key = params['id'];
     //     console.log('post key:' + this.key);
-    //     af.database.object('/posts/' + this.key).subscribe(post => {
+    //     af.database.object('/blog/posts' + this.key).subscribe(post => {
     //       this.post = post;
     //       console.log('post:' + post);
     //       af.auth.subscribe(auth => {
