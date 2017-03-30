@@ -4,6 +4,10 @@
     <md-card-subtitle>{{post.authorName}}</md-card-subtitle>
   </md-card-header>
 
+  <md-card-content *ngIf="post">
+      <img md-card-image *ngIf="post.imageUrl" #img [src]="imageSrc">
+  </md-card-content>
+
   <md-card-content>
     <div [innerHTML]="post.content"></div>
      <button md-raised-button [routerLink]="[ '/blog/posts']"><md-icon>comment</md-icon> Comments</button>

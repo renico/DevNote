@@ -5,6 +5,15 @@
       <md-input-container class="example-full-width">
         <input mdInput placeholder="Title" [ngModel]="item?.title" name="title" required>
       </md-input-container>
+      <md-card-content>
+      <input #filePicker placeholder="Title" type="file" accept="image/*,capture=camera">
+      <button md-raised-button title="Add an image" type="submit" class="btn-primary" (click)="saveImage(filePicker)">
+      <md-icon>save</md-icon> Add a image</button>
+      </md-card-content>
+      
+      <md-card-content *ngIf="item">
+        <img md-card-image *ngIf="item.imageUrl" #img [src]="imageSrc">
+      </md-card-content>
 
 
       <ckeditor [ngModel]="item?.content" name="content" debounce="500">
@@ -35,12 +44,6 @@
           </td>
         </tr>
         
-       <input #filePicker placeholder="Title" type="file" accept="image/*,capture=camera">
-      <button md-raised-button title="Add an image" type="submit" class="btn-primary" (click)="saveImage(filePicker)">
-      <md-icon>save</md-icon> Add a image</button>
-      <div *ngIf="item">
-        <img *ngIf="item.imageUrl" #img [src]="imageSrc">
-      </div>
       </table>
       <br>
       <div *ngIf="item">
@@ -50,6 +53,7 @@
       </div>
 
       <span *ngIf="auth && !item">author: {{auth.auth.displayName}}</span>
+      
       <md-card-actions>
         <!--<button md-button>LIKE</button>-->
         <button md-raised-button [routerLink]="[ '/blog/posts']">
@@ -66,6 +70,4 @@
 
     </form>
   </md-card>
-
-
 </div>

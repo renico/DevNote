@@ -23,19 +23,19 @@ button {
 }
 
 #fb {
-    background:#3B5998 url('assets/images/auth/facebook.svg') no-repeat 14px 6px;
+    background:#3B5998 url('/../../assets/images/auth/facebook.svg') no-repeat 14px 6px;
     background-size: 47px;
     color:#fff;
 }
 
 #google {
     border: 1px solid #95989A;
-    background: #fff  url('assets/images/auth/google.svg') no-repeat 25px;
+    background: #fff  url('/../../assets/images/auth/google.svg') no-repeat 25px;
     background-size: 25px;
 }
 
 #email {
-    background: #ECECEC  url('assets/images/auth/email.svg') no-repeat 25px;
+    background: #ECECEC  url('/../../assets/images/auth/email.svg') no-repeat 25px;
     background-size: 25px;
 }
 

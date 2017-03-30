@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 })
 export class EditComponent implements OnInit {
   imageSrc: any;
-  LOADING_IMAGE_URL: string = 'https://www.google.com/images/spin-32.gif';
+  LOADING_IMAGE_URL= 'https://www.google.com/images/spin-32.gif';
   error: any;
   state: string; // property for animations
   item: FirebaseListObservable<any>;
@@ -49,7 +49,8 @@ export class EditComponent implements OnInit {
           if (post['imageUrl'].startsWith('gs://')) {
             this.imageSrc = this.LOADING_IMAGE_URL; // Display a loading image first.
 
-            this.storage.refFromURL(post['imageUrl']).getMetadata().then( metadata =>{
+            this.storage.refFromURL(post['imageUrl'])
+            .getMetadata().then( metadata => {
               console.log('metadata.downloadURLs[0]:' + metadata.downloadURLs[0]);
               this.imageSrc = metadata.downloadURLs[0].toString();
             });
@@ -65,7 +66,7 @@ export class EditComponent implements OnInit {
     console.dir(filePicker);
     const file = filePicker.files[0];
 
-    
+
     // Check if the file is an image.
     if (!file) {
      this.snackBar.open('Need a image to upload ', 'Yes', { duration: 3000, });
