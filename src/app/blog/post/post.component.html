@@ -5,11 +5,7 @@
   </md-card-header>
 
   <md-card-content *ngIf="post">
-      <img md-card-image *ngIf="post.imageUrl" #img [src]="imageSrc"
-      style="height: 100%; width: 400px; left:50%; margin-left: -200px; display: block;
-  margin-left: auto;
-  margin-right: auto;">
-
+      <img class="md-image-card" src="{{post.imageUrl | imgPipe : otherTitle | async}}">
   </md-card-content>
 
   <md-card-content>

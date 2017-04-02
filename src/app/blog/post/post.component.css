@@ -1,0 +1,9 @@
+.md-image-card {
+  height: 400px;
+  width: auto;
+  /*left: 50%;
+  margin-left: -200px;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

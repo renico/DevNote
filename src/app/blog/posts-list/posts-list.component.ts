@@ -22,20 +22,6 @@ export class PostsListComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // getImageSrc(img: any, imageUrl: string){
-  //    if (imageUrl.startsWith('gs://')) {
-  //           // this.imageSrc = this.LOADING_IMAGE_URL; // Display a loading image first.
-  //           // this.storage.ref().child(this.post['imageUrl'])
-  //           // .getDownloadURL().then( url => this.imageSrc = url );
-  //           this.storage.refFromURL(imageUrl).getMetadata().then(metadata => {
-  //             img.src = metadata.downloadURLs[0].toString();
-  //             console.log('getImageSrc:' + metadata.downloadURLs[0].toString());
-  //           }).catch( error => console.log(error));
-  //         } else {
-  //           img.src =  imageUrl;
-  //         }
-  // }
 }
 
 
