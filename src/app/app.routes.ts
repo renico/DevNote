@@ -12,19 +12,20 @@ import { PostsListComponent } from './blog/posts-list/posts-list.component';
 
 import { AuthService } from './auth.service';
 
-export const router : Routes = [
+export const router: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'login-email', component: EmailComponent },
     { path: 'home', component: HomeComponent },
     { path: 'blog/posts', component: PostsListComponent },
+    { path: 'blog/post', component: PostsListComponent },
     { path: 'blog/edit-post', component: EditComponent, canActivate: [AuthService] },
     { path: 'blog/edit-post/:id', component: EditComponent, canActivate: [AuthService] },
     { path: 'blog/post/:id', component: PostComponent },
 
-    //{ path: 'admin', component: AdminComponent, canActivate: [AuthService] }
-    //{ path: 'admin', component: AdminComponent, canActivate: [AuthService] }
-]
+    // { path: 'admin', component: AdminComponent, canActivate: [AuthService] }
+    // { path: 'admin', component: AdminComponent, canActivate: [AuthService] }
+];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

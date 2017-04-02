@@ -6,6 +6,8 @@ import {MdSnackBar} from '@angular/material';
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable, FirebaseRef, FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase';
 
+import { ImgPipe } from './../img-pipe.pipe';
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -46,7 +48,7 @@ export class EditComponent implements OnInit {
         this.key = params['id'];
         this.af.database.object('/blog/posts/' + this.key).subscribe(post => {
           this.item = post;
-          if (post['imageUrl'].startsWith('gs://')) {
+          if (post['imageUrl'] && post['imageUrl'].startsWith('gs://')) {
             this.imageSrc = this.LOADING_IMAGE_URL; // Display a loading image first.
 
             this.storage.refFromURL(post['imageUrl'])
@@ -143,7 +145,7 @@ export class EditComponent implements OnInit {
             console.log(error);
           });
       } else {
-        this.key = this.af.database.list('/posts').push(post).key;
+        this.key = this.af.database.list('/blog/posts').push(post).key;
         this.af.database.object('/blog/postsDesc/' + this.key).update(desc);
       }
     }
@@ -167,17 +169,17 @@ export class EditComponent implements OnInit {
     });
   }
 
-  loadImage( _imageUri, imgElement) {
-    console.log('loadImage');
-    const imageUri = _imageUri;
-    if (imageUri.startsWith('gs://')) {
-      imgElement.src = this.LOADING_IMAGE_URL; // Display a loading image first.
-      this.storage.refFromURL(imageUri).getMetadata().then(function (metadata) {
-        imgElement.src = metadata.downloadURLs[0];
-      });
-    } else {
-      imgElement.src = imageUri;
-    }
-  }
+  // loadImage( _imageUri, imgElement) {
+  //   console.log('loadImage');
+  //   const imageUri = _imageUri;
+  //   if (imageUri.startsWith('gs://')) {
+  //     imgElement.src = this.LOADING_IMAGE_URL; // Display a loading image first.
+  //     this.storage.refFromURL(imageUri).getMetadata().then(function (metadata) {
+  //       imgElement.src = metadata.downloadURLs[0];
+  //     });
+  //   } else {
+  //     imgElement.src = imageUri;
+  //   }
+  // }
 
 }

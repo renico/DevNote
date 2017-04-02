@@ -1,31 +1,9 @@
-<div class="example-form">
-  <md-card class="example-form">
-    <form #formData='ngForm'>
+<div class="container" fxLayout="row" fxLayoutAlign="start">
+  <md-card fxFlex="30%" style="padding: 9px;">
 
-      <md-input-container class="example-full-width">
-        <input mdInput placeholder="Title" [ngModel]="item?.title" name="title" required>
-      </md-input-container>
-      <md-card-content>
-      <input #filePicker placeholder="Title" type="file" accept="image/*,capture=camera">
-      <button md-raised-button title="Add an image" type="submit" class="btn-primary" (click)="saveImage(filePicker)">
-      <md-icon>save</md-icon> Add a image</button>
-      </md-card-content>
-      
-      <md-card-content *ngIf="item">
-        <img md-card-image *ngIf="item.imageUrl" #img [src]="imageSrc">
-      </md-card-content>
-
-
-      <ckeditor [ngModel]="item?.content" name="content" debounce="500">
-      </ckeditor>
-      <br>
-
-      <!-- Post description section -->
-      <table class="example-full-width" cellspacing="0" style="background-color: #EEEEFF; box-shadow: 2px 2px 5px #999; margin:10px 10px; ">
+    <md-card-content>
+      <table class="example-full-width" cellspacing="0" style="background-color: #EEEEFF; box-shadow: 2px 2px 5px #999;">
         <tr>
-          <td>
-            <span>Grind list options:</span>
-          </td>
           <td style="width: 60px">
             <md-input-container class="example-full-width">
               <input mdInput placeholder="cols" [ngModel]="item?.cols" name="cols">
@@ -43,8 +21,35 @@
             </md-input-container>
           </td>
         </tr>
-        
+
       </table>
+    </md-card-content>
+
+    <md-card-content *ngIf="item">
+      <img *ngIf="item.imageUrl" md-card-image  
+      src="{{item.imageUrl | imgPipe : otherTitle | async}}" 
+      class="md-card-image" 
+      >
+      <input #filePicker placeholder="Title" type="file" accept="image/*,capture=camera">
+      <button md-raised-button title="Add an image" type="submit" class="btn-primary" (click)="saveImage(filePicker)">
+        <md-icon>save</md-icon> Add a image</button>
+    </md-card-content>
+
+  </md-card>
+
+  <md-card class="example-form">
+    <form #formData='ngForm'>
+
+      <md-input-container class="example-full-width">
+        <input mdInput placeholder="Title" [ngModel]="item?.title" name="title" required>
+      </md-input-container>
+
+      <ckeditor [ngModel]="item?.content" name="content" debounce="500">
+      </ckeditor>
+      <br>
+
+      <!-- Post description section -->
+
       <br>
       <div *ngIf="item">
         <span *ngIf="item.authorName"><md-icon>account circle</md-icon>Author: {{item.authorName}}</span>
@@ -53,7 +58,7 @@
       </div>
 
       <span *ngIf="auth && !item">author: {{auth.auth.displayName}}</span>
-      
+
       <md-card-actions>
         <!--<button md-button>LIKE</button>-->
         <button md-raised-button [routerLink]="[ '/blog/posts']">
@@ -62,10 +67,8 @@
         </button>
         <button *ngIf="item" md-raised-button [routerLink]="[ '/blog/post', item?.$key]">
           <md-icon>visibility</md-icon> View post</button>
-        <button md-raised-button type="submit" 
-        class="btn-primary" (click)="onUpdate(formData)"><md-icon>save</md-icon> Save</button>
-         <button md-raised-button type="submit" 
-        class="btn-danger" (click)="onDelete()"><md-icon>delete</md-icon> Delete</button>
+        <button md-raised-button type="submit" class="btn-primary" (click)="onUpdate(formData)"><md-icon>save</md-icon> Save</button>
+        <button md-raised-button type="submit" class="btn-danger" (click)="onDelete()"><md-icon>delete</md-icon> Delete</button>
       </md-card-actions>
 
     </form>

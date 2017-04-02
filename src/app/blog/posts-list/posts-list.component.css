@@ -1,0 +1,13 @@
+.md-card-content{
+    margin:0, -24px, 0, -24px;
+}
+
+.md-card-image{
+    max-height: 150px;
+    width: auto;
+    margin-left:auto;
+margin-right:auto;
+text-align: center;
+    /*padding-left: 30%;*/
+    /*padding-right: 30%;*/
+}

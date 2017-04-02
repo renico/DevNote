@@ -26,11 +26,12 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit() {
-        this.activatedRoute.params.subscribe((params: Params) => {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if (params['id']) {
         this.af.database.object('/blog/posts/' + params['id']).subscribe(post => {
-        this.post = post;
+          this.post = post;
           if (post['imageUrl'] && post['imageUrl'].startsWith('gs://')) {
-            //this.imageSrc = this.LOADING_IMAGE_URL; // Display a loading image first.
+            // this.imageSrc = this.LOADING_IMAGE_URL; // Display a loading image first.
             // this.storage.ref().child(this.post['imageUrl'])
             // .getDownloadURL().then( url => this.imageSrc = url );
             this.storage.refFromURL(post['imageUrl']).getMetadata().then(metadata => {
@@ -41,7 +42,11 @@ export class PostComponent implements OnInit {
             this.imageSrc = post['imageUrl'];
           }
         });
-      });
+      } else {
+        this.router.navigateByUrl('/blog/posts');
+
+      }
+    });
 
   }
 
