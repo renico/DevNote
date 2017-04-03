@@ -17,6 +17,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 
 import { routes } from './app.routes';
 import { AuthService } from './auth.service';
+import { BlogService } from './services/blog.service';
 
 import { CurrentUserComponent } from './auth/current-user/current-user.component';
 import { AppComponent } from './app.component';
@@ -58,7 +59,7 @@ import { FirebaseUrlPipe } from './pipe/firebase-url.pipe';
     CKEditorModule,
     BrowserAnimationsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, BlogService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

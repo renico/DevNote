@@ -10,23 +10,23 @@
  fxLayoutWrap="wrap">
 
     <md-input-container class="example-full-width" fxFlex="100%">
-      <h2><input mdInput placeholder="Title" [ngModel]="item?.title" name="title" required></h2>
+      <h2><input mdInput placeholder="Title" [ngModel]="post?.title" name="title" required></h2>
     </md-input-container>
 
-    <ckeditor [ngModel]="item?.content" name="content" debounce="500" fxFlex="100%">
+    <ckeditor [ngModel]="post?.content" name="content" debounce="500" fxFlex="100%">
     </ckeditor>
     <br>
 
     <!-- Post description section -->
 
     <br>
-    <div *ngIf="item">
-      <span *ngIf="item.authorName"><md-icon>account circle</md-icon>Author: {{item.authorName}}</span>
-      <span *ngIf="item.date"><md-icon>date range</md-icon>Create: {{item.date | date: 'dd/MM/yyyy'}}</span>
-      <span *ngIf="item.maj"><md-icon>event</md-icon>Màj: {{item.maj | date: 'dd/MM/yyyy'}}</span>
+    <div *ngIf="post">
+      <span *ngIf="post.authorName"><md-icon>account circle</md-icon>Author: {{post.authorName}}</span>
+      <span *ngIf="post.date"><md-icon>date range</md-icon>Create: {{post.date | date: 'dd/MM/yyyy'}}</span>
+      <span *ngIf="post.maj"><md-icon>event</md-icon>Màj: {{post.maj | date: 'dd/MM/yyyy'}}</span>
     </div>
 
-    <span *ngIf="auth && !item">author: {{auth.auth.displayName}}</span>
+    <span *ngIf="auth && !post">author: {{auth.auth.displayName}}</span>
 
     <md-card-actions>
       <!--<button md-button>LIKE</button>-->
@@ -34,7 +34,7 @@
           <md-icon>list</md-icon>
           Return to posts liste
         </button>
-      <button *ngIf="item" md-raised-button [routerLink]="[ '/blog/post', item?.$key]">
+      <button *ngIf="post" md-raised-button [routerLink]="[ '/blog/post', post?.$key]">
           <md-icon>visibility</md-icon> View post</button>
       <button md-raised-button type="submit" class="btn-primary" (click)="onUpdate(formData)"><md-icon>save</md-icon> Save</button>
       <button md-raised-button type="submit" class="btn-danger" (click)="onDelete()"><md-icon>delete</md-icon> Delete</button>
@@ -51,25 +51,25 @@
           <tr>
             <td style="width: 60px">
               <md-input-container class="example-full-width">
-                <input mdInput placeholder="cols" [ngModel]="item?.cols" name="cols">
+                <input mdInput placeholder="cols" [ngModel]="post?.cols" name="cols">
               </md-input-container>
             </td>
             <td style="width: 60px">
               <md-input-container class="example-full-width">
-                <input mdInput placeholder="rows" [ngModel]="item?.rows" name="rows">
+                <input mdInput placeholder="rows" [ngModel]="post?.rows" name="rows">
               </md-input-container>
             </td>
             <td style="width: 120px">
               <md-input-container class="example-full-width">
-                <input mdInput #color maxlength="7" placeholder="color" [ngModel]="item?.color" name="color">
+                <input mdInput #color maxlength="7" placeholder="color" [ngModel]="post?.color" name="color">
                 <!--<md-hint ngIf="color" align="end">{{color.value.length}} / 7</md-hint>-->
               </md-input-container>
             </td>
           </tr>
         </table>
       </md-card-content>
-      <md-card-content *ngIf="item">
-        <img *ngIf="item.imageUrl" md-card-image src="{{item.imageUrl | firebaseUrl : otherTitle | async}}" class="md-card-image">
+      <md-card-content *ngIf="post">
+        <img *ngIf="post.imageUrl" md-card-image src="{{post.imageUrl | firebaseUrl : otherTitle | async}}" class="md-card-image">
         <input #filePicker placeholder="Title" type="file" accept="image/*,capture=camera">
         <button md-raised-button title="Add an image" type="submit" class="btn-primary" (click)="saveImage(filePicker)">
         <md-icon>save</md-icon> Add a image</button>

@@ -1,43 +1,29 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseApp} from 'angularfire2';
+
 import { FirebaseUrlPipe } from './../../pipe/firebase-url.pipe';
+import { BlogService } from './../../services/blog.service';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent implements OnInit {
-  LOADING_IMAGE_URL: string = 'https://www.google.com/images/spin-32.gif';
+export class PostComponent {
   canActivate = false;
   post: FirebaseListObservable<any>;
-  key: string;
-  imageSrc = 'https://www.google.com/images/spin-32.gif';
-  private storage: any;
-  private firebase: any;
 
   constructor(
-    @Inject(FirebaseApp) firebaseApp: firebase.app.App,
-    public af: AngularFire,
+    private bs: BlogService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-    ) {
-      this.storage = firebaseApp.storage();
-  }
-
-  ngOnInit() {
+    private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params['id']) {
-        this.af.database.object('/blog/posts/' + params['id']).subscribe(post => {
+        bs.readPost(params['id']).subscribe(post => {
           this.post = post;
         });
-      } else {
-        this.router.navigateByUrl('/blog/posts');
-
       }
     });
-
   }
-
 }

@@ -1,110 +1,87 @@
-import { Component, OnInit, OnDestroy, HostBinding, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import {MdSnackBar} from '@angular/material';
-
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable, FirebaseRef, FirebaseApp } from 'angularfire2';
-import * as firebase from 'firebase';
+
 
 import { FirebaseUrlPipe } from './../../pipe/firebase-url.pipe';
+import { BlogService } from './../../services/blog.service';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
 })
-export class EditComponent implements OnInit {
-  imageSrc: any;
-  LOADING_IMAGE_URL= 'https://www.google.com/images/spin-32.gif';
+export class EditComponent {
   error: any;
   state: string; // property for animations
-  item: FirebaseListObservable<any>;
-  auth: any;
-  key: string;
-  private ref: any;
-  private storage: any;
-
-  // Upload image
-
+  post: FirebaseListObservable<any>;
 
   constructor(
-    public af: AngularFire,
-    @Inject(FirebaseApp) firebaseApp: firebase.app.App,
-    @Inject(FirebaseRef) ref,
+    private bs: BlogService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    public snackBar: MdSnackBar) {
-      this.ref = ref.database().ref();
-      this.storage = firebaseApp.storage();
-    }
-
-  ngOnInit() {
-    this.af.auth.subscribe(auth => {
-      this.auth = auth;
-    });
-    // subscribe to router event
+    private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe((params: Params) => {
+      console.log('params["id"]: ' + params['id']);
       if (params['id']) {
-        this.key = params['id'];
-        this.af.database.object('/blog/posts/' + this.key).subscribe(post => {
-          this.item = post;
-          if (post['imageUrl'] && post['imageUrl'].startsWith('gs://')) {
-            this.imageSrc = this.LOADING_IMAGE_URL; // Display a loading image first.
-
-            this.storage.refFromURL(post['imageUrl'])
-            .getMetadata().then( metadata => {
-              console.log('metadata.downloadURLs[0]:' + metadata.downloadURLs[0]);
-              this.imageSrc = metadata.downloadURLs[0].toString();
-            });
-          } else {
-            this.imageSrc = post['imageUrl'];
-          }
+        bs.readPost(params['id']).subscribe(post => {
+          this.post = post;
         });
+      } else {
+        bs.currentKey = null;
       }
     });
   }
 
-  saveImage(filePicker) {
-    console.dir(filePicker);
-    const file = filePicker.files[0];
-
-
-    // Check if the file is an image.
-    if (!file) {
-     this.snackBar.open('Need a image to upload ', 'Yes', { duration: 3000, });
-      return;
-    } else if (!file.type.match('image.*')) {
-      this.snackBar.open('You can only share images ', 'Yes', { duration: 3000, });
-      return;
-    } else {
-      this.snackBar.open('You are ready to share images ', 'Yes', { duration: 3000, });
-    }
-
-    this.af.database.object('/blog/postsDesc/' + this.key).update({
-      imageUrl: this.LOADING_IMAGE_URL,
-    }).then(function (data) {
-
-      // Upload the image to Cloud Storage.
-      const filePath = 'blog/posts/' + this.key + '/' + file.name;
-      return this.storage.ref(filePath).put(file).then(function (snapshot) {
-
-        // Get the file's Storage URI and update the post placeholder.
-        const fullPath = snapshot.metadata.fullPath;
-        console.log('imageUrl:' + fullPath);
-        console.log(data);
-        return this.af.database.object('/blog/postsDesc/' + this.key)
-          .update({ imageUrl: this.storage.ref(fullPath).toString() })
-          .then(
-            this.af.database.object('/blog/posts/' + this.key)
-            .update({ imageUrl: this.storage.ref(fullPath).toString() }));
-      }.bind(this));
-    }.bind(this)).catch(function (error) {
-      console.error('There was an error uploading a file to Cloud Storage:', error);
-    });
-
+  onUpdate(formData) {
+    this.bs.updatePost(formData);
   }
 
+  saveImage(filePicker) {
+    this.bs.saveImage(filePicker);
+  }
+  // saveImage(filePicker) {
+  //   console.dir(filePicker);
+  //   const file = filePicker.files[0];
 
+
+  //   // Check if the file is an image.
+  //   if (!file) {
+  //    this.snackBar.open('Need a image to upload ', 'Yes', { duration: 3000, });
+  //     return;
+  //   } else if (!file.type.match('image.*')) {
+  //     this.snackBar.open('You can only share images ', 'Yes', { duration: 3000, });
+  //     return;
+  //   } else {
+  //     this.snackBar.open('You are ready to share images ', 'Yes', { duration: 3000, });
+  //   }
+
+  //   this.af.database.object('/blog/postsDesc/' + this.key).update({
+  //     imageUrl: this.LOADING_IMAGE_URL,
+  //   }).then(function (data) {
+
+  //     // Upload the image to Cloud Storage.
+  //     const filePath = 'blog/posts/' + this.key + '/' + file.name;
+  //     return this.storage.ref(filePath).put(file).then(function (snapshot) {
+
+  //       // Get the file's Storage URI and update the post placeholder.
+  //       const fullPath = snapshot.metadata.fullPath;
+  //       console.log('imageUrl:' + fullPath);
+  //       console.log(data);
+  //       return this.af.database.object('/blog/postsDesc/' + this.key)
+  //         .update({ imageUrl: this.storage.ref(fullPath).toString() })
+  //         .then(
+  //           this.af.database.object('/blog/posts/' + this.key)
+  //           .update({ imageUrl: this.storage.ref(fullPath).toString() }));
+  //     }.bind(this));
+  //   }.bind(this)).catch(function (error) {
+  //     console.error('There was an error uploading a file to Cloud Storage:', error);
+  //   });
+
+  // }
+
+
+/*
   onUpdate(formData) {
     console.log('onUpdate()key:' + this.key);
     if (formData) {
@@ -168,6 +145,7 @@ export class EditComponent implements OnInit {
       this.router.navigateByUrl('/home');
     });
   }
+  */
 
   // loadImage( _imageUri, imgElement) {
   //   console.log('loadImage');
