@@ -1,76 +1,80 @@
 <div class="container" fxLayout="row" fxLayoutAlign="start">
-  <md-card fxFlex="30%" style="padding: 9px;">
-
-    <md-card-content>
-      <table class="example-full-width" cellspacing="0" style="background-color: #EEEEFF; box-shadow: 2px 2px 5px #999;">
-        <tr>
-          <td style="width: 60px">
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="cols" [ngModel]="item?.cols" name="cols">
-            </md-input-container>
-          </td>
-          <td style="width: 60px">
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="rows" [ngModel]="item?.rows" name="rows">
-            </md-input-container>
-          </td>
-          <td style="width: 120px">
-            <md-input-container class="example-full-width">
-              <input mdInput #color maxlength="7" placeholder="color" [ngModel]="item?.color" name="color">
-              <!--<md-hint ngIf="color" align="end">{{color.value.length}} / 7</md-hint>-->
-            </md-input-container>
-          </td>
-        </tr>
-
-      </table>
-    </md-card-content>
-
-    <md-card-content *ngIf="item">
-      <img *ngIf="item.imageUrl" md-card-image  
-      src="{{item.imageUrl | imgPipe : otherTitle | async}}" 
-      class="md-card-image" 
-      >
-      <input #filePicker placeholder="Title" type="file" accept="image/*,capture=camera">
-      <button md-raised-button title="Add an image" type="submit" class="btn-primary" (click)="saveImage(filePicker)">
-        <md-icon>save</md-icon> Add a image</button>
-    </md-card-content>
-
-  </md-card>
-
-  <md-card class="example-form">
     <form #formData='ngForm'>
 
-      <md-input-container class="example-full-width">
-        <input mdInput placeholder="Title" [ngModel]="item?.title" name="title" required>
-      </md-input-container>
 
-      <ckeditor [ngModel]="item?.content" name="content" debounce="500">
-      </ckeditor>
-      <br>
 
-      <!-- Post description section -->
+  <md-card class="widgets-row"
+ fxLayout
+ fxLayout.xs="column"
+ fxLayoutAlign="start"
+ fxLayoutWrap="wrap">
 
-      <br>
-      <div *ngIf="item">
-        <span *ngIf="item.authorName"><md-icon>account circle</md-icon>Author: {{item.authorName}}</span>
-        <span *ngIf="item.date"><md-icon>date range</md-icon>Create: {{item.date | date: 'dd/MM/yyyy'}}</span>
-        <span *ngIf="item.maj"><md-icon>event</md-icon>Màj: {{item.maj | date: 'dd/MM/yyyy'}}</span>
-      </div>
+    <md-input-container class="example-full-width" fxFlex="100%">
+      <h2><input mdInput placeholder="Title" [ngModel]="item?.title" name="title" required></h2>
+    </md-input-container>
 
-      <span *ngIf="auth && !item">author: {{auth.auth.displayName}}</span>
+    <ckeditor [ngModel]="item?.content" name="content" debounce="500" fxFlex="100%">
+    </ckeditor>
+    <br>
 
-      <md-card-actions>
-        <!--<button md-button>LIKE</button>-->
-        <button md-raised-button [routerLink]="[ '/blog/posts']">
+    <!-- Post description section -->
+
+    <br>
+    <div *ngIf="item">
+      <span *ngIf="item.authorName"><md-icon>account circle</md-icon>Author: {{item.authorName}}</span>
+      <span *ngIf="item.date"><md-icon>date range</md-icon>Create: {{item.date | date: 'dd/MM/yyyy'}}</span>
+      <span *ngIf="item.maj"><md-icon>event</md-icon>Màj: {{item.maj | date: 'dd/MM/yyyy'}}</span>
+    </div>
+
+    <span *ngIf="auth && !item">author: {{auth.auth.displayName}}</span>
+
+    <md-card-actions>
+      <!--<button md-button>LIKE</button>-->
+      <button md-raised-button [routerLink]="[ '/blog/posts']">
           <md-icon>list</md-icon>
           Return to posts liste
         </button>
-        <button *ngIf="item" md-raised-button [routerLink]="[ '/blog/post', item?.$key]">
+      <button *ngIf="item" md-raised-button [routerLink]="[ '/blog/post', item?.$key]">
           <md-icon>visibility</md-icon> View post</button>
-        <button md-raised-button type="submit" class="btn-primary" (click)="onUpdate(formData)"><md-icon>save</md-icon> Save</button>
-        <button md-raised-button type="submit" class="btn-danger" (click)="onDelete()"><md-icon>delete</md-icon> Delete</button>
-      </md-card-actions>
-
-    </form>
+      <button md-raised-button type="submit" class="btn-primary" (click)="onUpdate(formData)"><md-icon>save</md-icon> Save</button>
+      <button md-raised-button type="submit" class="btn-danger" (click)="onDelete()"><md-icon>delete</md-icon> Delete</button>
+    </md-card-actions>
   </md-card>
+
+    <md-card  class="widgets-row"
+ fxLayout
+ fxLayout.xs="column"
+ fxLayoutAlign="start"
+ fxLayoutWrap="wrap">
+      <md-card-content fxFlex="30%">
+        <table class="example-full-width" cellspacing="0" style="background-color: #EEEEFF; box-shadow: 2px 2px 5px #999;">
+          <tr>
+            <td style="width: 60px">
+              <md-input-container class="example-full-width">
+                <input mdInput placeholder="cols" [ngModel]="item?.cols" name="cols">
+              </md-input-container>
+            </td>
+            <td style="width: 60px">
+              <md-input-container class="example-full-width">
+                <input mdInput placeholder="rows" [ngModel]="item?.rows" name="rows">
+              </md-input-container>
+            </td>
+            <td style="width: 120px">
+              <md-input-container class="example-full-width">
+                <input mdInput #color maxlength="7" placeholder="color" [ngModel]="item?.color" name="color">
+                <!--<md-hint ngIf="color" align="end">{{color.value.length}} / 7</md-hint>-->
+              </md-input-container>
+            </td>
+          </tr>
+        </table>
+      </md-card-content>
+      <md-card-content *ngIf="item">
+        <img *ngIf="item.imageUrl" md-card-image src="{{item.imageUrl | firebaseUrl : otherTitle | async}}" class="md-card-image">
+        <input #filePicker placeholder="Title" type="file" accept="image/*,capture=camera">
+        <button md-raised-button title="Add an image" type="submit" class="btn-primary" (click)="saveImage(filePicker)">
+        <md-icon>save</md-icon> Add a image</button>
+      </md-card-content>
+  </md-card>
+
+  </form>
 </div>

@@ -6,7 +6,7 @@ import {MdSnackBar} from '@angular/material';
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable, FirebaseRef, FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase';
 
-import { ImgPipe } from './../img-pipe.pipe';
+import { FirebaseUrlPipe } from './../../pipe/firebase-url.pipe';
 
 @Component({
   selector: 'app-edit',

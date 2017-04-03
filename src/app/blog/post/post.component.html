@@ -1,11 +1,11 @@
 <md-card class="example-form" *ngIf="post">
   <md-card-header>
-    <md-card-title>{{post.title}}</md-card-title>
+    <md-card-title><h2>{{post.title}}</h2></md-card-title>
     <md-card-subtitle>{{post.authorName}}</md-card-subtitle>
   </md-card-header>
 
   <md-card-content *ngIf="post">
-      <img class="md-image-card" src="{{post.imageUrl | imgPipe : otherTitle | async}}">
+      <img class="md-image-card" src="{{post.imageUrl | firebaseUrl : otherTitle | async}}">
   </md-card-content>
 
   <md-card-content>

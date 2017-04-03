@@ -8,7 +8,7 @@
     </md-card-header>
 
     <md-card-content md-card-image *ngIf="post && post.imageUrl && post.color" [style.background-color]="post.color">
-      <img class="md-image-card" src="{{post.imageUrl | imgPipe : otherTitle | async}}">
+      <img class="md-image-card" src="{{post.imageUrl | firebaseUrl : otherTitle | async}}">
     </md-card-content>
 
     <md-card-actions>

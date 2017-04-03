@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseApp} from 'angularfire2';
-import { ImgPipe } from './../img-pipe.pipe';
+import { FirebaseUrlPipe } from './../../pipe/firebase-url.pipe';
 
 @Component({
   selector: 'app-post',

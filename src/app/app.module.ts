@@ -15,7 +15,6 @@ import 'hammerjs';
 import { CKEditorModule } from 'ng2-ckeditor';
 
 
-
 import { routes } from './app.routes';
 import { AuthService } from './auth.service';
 
@@ -30,10 +29,7 @@ import { PostsListComponent } from './blog/posts-list/posts-list.component';
 import { PostComponent } from './blog/post/post.component';
 import { CommentComponent } from './blog/comment/comment.component';
 import { CommentsListComponent } from './blog/comments-list/comments-list.component';
-import { FileUploadComponent } from './comp/file-upload/file-upload.component';
-import { ImgPipe } from './blog/img-pipe.pipe';
-
-
+import { FirebaseUrlPipe } from './pipe/firebase-url.pipe';
 
 
 @NgModule({
@@ -49,8 +45,7 @@ import { ImgPipe } from './blog/img-pipe.pipe';
     PostComponent,
     CommentComponent,
     CommentsListComponent,
-    FileUploadComponent,
-    ImgPipe,
+    FirebaseUrlPipe,
   ],
   imports: [
     BrowserModule,

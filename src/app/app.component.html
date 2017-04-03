@@ -1,13 +1,27 @@
+<div id="st-container" class="st-container">
 
-  <md-toolbar color="primary">
-    <md-icon>menu</md-icon>
-
-    Prise de notes:
-
-    <span class="example-spacer"></span>
-    <app-current-user style="float: right;"></app-current-user>
-  
-  </md-toolbar>
+  <nav class="st-menu st-effect-1" id="menu-1">
+    <!-- sidebar content -->
+  </nav>
 
 
-<router-outlet></router-outlet>
+  <div class="st-pusher" >
+    <md-toolbar class="toolbar" color="primary">
+      <md-icon>menu</md-icon>
+
+      Prise de notes:
+
+      <span class="example-spacer"></span>
+      <app-current-user class="user"></app-current-user>
+
+    </md-toolbar>
+
+    <div class="st-content">
+      <!-- this is the wrapper for the content -->
+      <div class="st-content-inner">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+</div>
