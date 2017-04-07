@@ -16,7 +16,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 
 
 import { routes } from './app.routes';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { BlogService } from './services/blog.service';
 
 import { CurrentUserComponent } from './auth/current-user/current-user.component';
@@ -31,6 +31,8 @@ import { PostComponent } from './blog/post/post.component';
 import { CommentComponent } from './blog/comment/comment.component';
 import { CommentsListComponent } from './blog/comments-list/comments-list.component';
 import { FirebaseUrlPipe } from './pipe/firebase-url.pipe';
+
+import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
 
 
 @NgModule({
@@ -58,8 +60,9 @@ import { FirebaseUrlPipe } from './pipe/firebase-url.pipe';
     MaterialModule.forRoot(),
     CKEditorModule,
     BrowserAnimationsModule,
+    HighlightJsModule,
   ],
-  providers: [AuthService, BlogService],
+  providers: [AuthService, BlogService, HighlightJsService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

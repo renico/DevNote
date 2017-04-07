@@ -10,7 +10,7 @@ import { EditComponent } from './blog/edit/edit.component';
 import { PostComponent } from './blog/post/post.component';
 import { PostsListComponent } from './blog/posts-list/posts-list.component';
 
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 
 export const router: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },

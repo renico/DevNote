@@ -7,7 +7,7 @@ import {
 } from 'angularfire2';
 import { Router } from '@angular/router';
 
-import { MdSnackBar } from '@angular/material';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 @Injectable()
 export class BlogService {
@@ -18,12 +18,12 @@ export class BlogService {
   public storage: any;
 
 
-  constructor(public _angularFire: AngularFire,
-    public _auth: AngularFireAuth,
-    @Inject(FirebaseApp) firebaseApp: firebase.app.App,
-    public snackBar: MdSnackBar,
-    public router: Router,
-  ) {
+  constructor(  public _angularFire: AngularFire,
+                public _auth: AngularFireAuth,
+                @Inject(FirebaseApp) firebaseApp: firebase.app.App,
+                public snackBar: MdSnackBar,
+                public router: Router,
+            ) {
     this.angularFire = _angularFire;
     this.angularFire.auth.subscribe(auth => this.auth = auth);
     this.storage = firebaseApp.storage();
@@ -123,7 +123,10 @@ export class BlogService {
 
   deletePost() {
     console.log('onDelete');
-    this.snackBar.open('Do you want to delete this post? ', 'Yes', { duration: 3000, })
+    let config = new MdSnackBarConfig();
+    config.duration = 30000;
+    config.extraClasses = ['bg-danger'];
+    this.snackBar.open('Do you want to delete this post? ', 'Yes', config)
       .onAction().subscribe(() => {
         this.deletePosConfirme();
       });

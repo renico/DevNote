@@ -7,6 +7,9 @@
 }
 /* needed */
 
+.bg-danger{
+	background-color: #FF5353
+}
 
 *,
 *:after,

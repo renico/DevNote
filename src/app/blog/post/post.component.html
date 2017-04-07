@@ -4,12 +4,14 @@
     <md-card-subtitle>{{post.authorName}}</md-card-subtitle>
   </md-card-header>
 
+<!--<div class="loader">Loading...</div>-->
   <md-card-content *ngIf="post">
+      <div class="loader">loader...</div>
       <img class="md-image-card" src="{{post.imageUrl | firebaseUrl : otherTitle | async}}">
   </md-card-content>
 
-  <md-card-content>
-    <div [innerHTML]="post.content"></div>
+  <md-card-content *ngIf="post && post.content">
+    <div id="divContent" #divContent [innerHTML]="post.content" highlight-js-content=".highlight"></div>
      <button md-raised-button [routerLink]="[ '/blog/posts']"><md-icon>comment</md-icon> Comments</button>
   </md-card-content>
 
