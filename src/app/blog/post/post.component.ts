@@ -14,7 +14,7 @@ import { AngularFire, FirebaseListObservable, FirebaseApp} from 'angularfire2';
 
 import { FirebaseUrlPipe } from './../../pipe/firebase-url.pipe';
 import { BlogService } from './../../services/blog.service';
-import { HighlightJsService } from 'angular2-highlight-js';
+// import { HighlightJsService } from 'angular2-highlight-js';
 
 @Component({
   selector: 'app-post',
@@ -27,16 +27,16 @@ export class PostComponent implements AfterViewInit, AfterContentInit {
   @ContentChildren('divContent') divContent: ElementRef;
   canActivate = false;
   post: FirebaseListObservable<any>;
-  service: HighlightJsService;
+  // service: HighlightJsService;
 
   constructor(
     private rd: Renderer2,
     private bs: BlogService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private _service: HighlightJsService,
+    // private _service: HighlightJsService,
     ) {
-      this.service = _service;
+      // this.service = _service;
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params['id']) {
         bs.readPost(params['id']).subscribe(post => {
