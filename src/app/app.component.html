@@ -1,26 +1,58 @@
-<div id="st-container" class="st-container">
+<input type="checkbox" name="toggle" id="toggle" />
+<input type="checkbox" name="toggleLogin" id="toggleLogin" />
 
-  <nav class="st-menu st-effect-1" id="menu-1">
-    <!-- sidebar content -->
-  </nav>
-
-
-  <div class="st-pusher" >
-    <md-toolbar class="toolbar" color="primary">
-      <md-icon>menu</md-icon>
-
-      <span class="example-spacer"></span>
-      <app-current-user class="user"></app-current-user>
-
-    </md-toolbar>
-    
-    
-    <div class="st-content">
-      <!-- this is the wrapper for the content -->
-      <div class="st-content-inner">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-  </div>
+<div class="nav-menu">
+  <ul>
+    <li>
+      <a [routerLink]="[ '/home']">Home</a>
+    </li>
+    <li>
+      <a [routerLink]="[ '/blog']">
+        <md-icon>create</md-icon> Blog</a>
+    </li>
+  </ul>
 </div>
 
+<div class="nav-menu-login">
+  <ul>
+    <li>
+      <a [routerLink]="['/login']">Login</a>
+    </li>
+    <li>
+      <a [routerLink]="['/signup']">Signup</a>
+    </li>
+  </ul>
+   <router-outlet name="user"></router-outlet>
+</div>
+
+<md-toolbar class="toolbar">
+  <md-icon>home</md-icon>
+  <label for="toggle">menu</label>
+  <span class="example-spacer"></span>
+  <label for="toggleLogin">
+  <app-current-user class="user"></app-current-user>
+  </label>
+</md-toolbar> 
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+
+
+
+
+
+<!--<input type="checkbox" name="toggle" id="toggle" />
+<label for="toggle"></label>
+
+<div class="container">
+  <h1>Pure CSS3 Slide Down Toggle Demo</h1>
+  <h2> Click the Open button to see hidden mesage.</h2>
+</div>
+
+<div class="nav-menu">
+  <h1> hello, I'm a hidden message. You found it.</h1>
+  <h2>Now Click the Heart button in the bottom to support CSS3</h2>
+</div>-->
