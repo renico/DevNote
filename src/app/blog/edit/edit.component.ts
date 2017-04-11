@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable, FirebaseRef, FirebaseApp } from 'angularfire2';
-
+import { FirebaseListObservable } from 'angularfire2';
 
 import { FirebaseUrlPipe } from './../../pipe/firebase-url.pipe';
 import { BlogService } from './../../services/blog.service';
