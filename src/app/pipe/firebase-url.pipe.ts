@@ -12,6 +12,7 @@ export class FirebaseUrlPipe implements PipeTransform {
   }
 
   transform(value: any, args?: any): any {
+    if (!value) { return; }
     if (value.startsWith('gs://')) {
       return this.storage.refFromURL(value).getMetadata()
       .then( metadata => {
