@@ -28,6 +28,11 @@
       }
     }
   ],
+  "assets": [
+    "assets",
+    "favicon.ico",
+    "service-worker.js"
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"

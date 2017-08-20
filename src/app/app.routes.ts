@@ -13,15 +13,23 @@ import { PostsListComponent } from './blog/posts-list/posts-list.component';
 import { AuthService } from './services/auth.service';
 
 export const router: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    // { path: 'speakers', component: SpeakersComponent, children: [
+    // { path: 'speakersList', component: SpeakersListComponent, outlet: 'list' },
+    // { path: ':id', component: BioComponent, outlet: 'bio' }
+//   ] }
+    { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'login-email', component: EmailComponent },
+    // { path: 'login', component: LoginComponent, outlet: 'user' },
+    // { path: 'signup', component: SignupComponent, outlet: 'user' },
+    // { path: 'login-email', component: EmailComponent, outlet: 'user' },
     { path: 'home', component: HomeComponent },
-    { path: 'blog/posts', component: PostsListComponent },
-    { path: 'blog/post', component: PostsListComponent },
-    { path: 'blog/edit-post', component: EditComponent, canActivate: [AuthService] },
-    { path: 'blog/edit-post/:id', component: EditComponent, canActivate: [AuthService] },
+    { path: 'blog',         component: PostsListComponent },
+    { path: 'blog/posts',   component: PostsListComponent },
+    { path: 'blog/post',    component: PostsListComponent },
+    { path: 'blog/edit-post',       component: EditComponent, canActivate: [AuthService] },
+    { path: 'blog/edit-post/:id',   component: EditComponent, canActivate: [AuthService] },
     { path: 'blog/post/:id', component: PostComponent },
 
     // { path: 'admin', component: AdminComponent, canActivate: [AuthService] }

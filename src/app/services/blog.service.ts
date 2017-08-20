@@ -33,7 +33,7 @@ export class BlogService {
     if (key && key !== 'undefind' && key != null) {
       this.currentKey = key;
     } else {
-      console.log('Wrong key format: ' + key);
+      console.log('Wrong key format: ${key}');
       return null;
     }
     return this.angularFire.database.object('/blog/posts/' + this.currentKey);
